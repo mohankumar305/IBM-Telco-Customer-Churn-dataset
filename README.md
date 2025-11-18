@@ -1,162 +1,72 @@
-# IBM-Telco-Customer-Churn-dataset
-This project explores how machine learning can be used to predict customer churn for a telecom company and explain why the model makes each prediction. Instead of treating the model as a black box, the goal is to understand the key factors that influence customer decisions, both at the overall (global) level and for individual customers (local level).
+Telco Customer Churn Prediction
+Project Overview
+This project aims to predict customer churn for a telecommunications company using an interpretable machine learning model. The goal is to accurately identify which customers are likely to leave, allowing for targeted retention efforts. The model is built on the IBM Telco Customer Churn dataset (OpenML data_id=42178), which includes demographic, service usage, and billing information.
 
-The dataset used for this project is the IBM Telco Customer Churn Dataset, which is downloaded automatically from Google using a direct link.
+Key Features
+Data preprocessing including missing value imputation and categorical encoding.
 
-## 1. Project Objective
+Handling class imbalance with SMOTE for improved minority class prediction.
 
-The main aim of the project is to:
+Use of XGBoost classifier with hyperparameter tuning via GridSearchCV.
 
-Build a strong churn prediction model using XGBoost
+Model evaluation using ROC AUC, F1-score, classification report, and confusion matrix.
 
-Handle class imbalance properly
+Comprehensive explainability with SHAP, including global feature importance and local individual prediction explanations.
 
-Use SHAP (SHapley Additive exPlanations) to interpret the model
+Technologies Used
+Python 3
 
-Identify the top features that cause churn
+XGBoost for machine learning modeling
 
-Explain the predictions for three specific customers:
+SHAP for model interpretability and feature attribution
 
-One high-risk customer
+Scikit-learn for preprocessing, metrics, and model tuning
 
-One low-risk customer
+Imbalanced-learn for SMOTE oversampling
 
-One borderline customer
+Matplotlib for visualization
 
-The final output should help a telecom business understand why customers leave and what actions could reduce churn.
+Getting Started
+Installation
+Clone the repository:
 
-## 2. Dataset
+text
+git clone <repository-url>
+cd telco-customer-churn
+Install dependencies:
 
-The dataset is directly loaded from this public Google URL:
+text
+pip install -r requirements.txt
+Running the Model
+Run the main Jupyter notebook customer_churn_prediction.ipynb which includes:
 
-"https://raw.githubusercontent.com/IBM/telco-customer-churn-on-icp4d/master/data/Telco-Customer-Churn.csv"
+Data loading and cleaning
 
-It contains information about:
+Feature engineering and encoding
 
-Customer demographics
+Model training and hyperparameter tuning
 
-Contract types
+Model evaluation on test data
 
-Billing and payment patterns
+SHAP-based interpretation for global and local explanations
 
-Services they use
+Outputs
+AUC and F1-score metrics reflecting model performance
 
-Whether they churned or not
+Classification report and confusion matrix
 
-A few columns (TotalCharges, customerID) require cleaning before training the model.
+Global SHAP summary plots (dot and bar)
 
-## 3. Approach
+Plain text top 10 feature importance list with SHAP impact values
 
-### a. Preprocessing
+Local SHAP explanations with quantitative interpretation for example customers
 
-* Missing values in TotalCharges were fixed
+Results
+The best model achieved an AUC score of approximately 0.84 on the test set.
 
-* Categorical features were label-encoded
+F1-score optimized at a chosen classification threshold of 0.3 was approximately 0.59.
 
-* The dataset was split into train and test sets
+Top predictors of churn include contract type (Month-to-month), tenure, and monthly charges.
 
-* Imbalance in the target variable was handled using scale_pos_weight
+Local explanations clarify how individual features push predictions up or down for specific customers.
 
-### b. Model
-
-* The XGBoost classifier was chosen because:
-
-* It handles tabular data well
-
-* It naturally works with SHAP
-
-* It performs strongly on churn datasets
-
-* The model was trained with tuned parameters.
-
-### c. Evaluation
-
-* The following metrics were calculated:
-
-* Accuracy
-
-* F1-Score
-
-* AUC
-
-* Classification Report
-
-These help judge how well the model performs overall.
-
-## 4. SHAP Explainability
-
-SHAP was used for two main purposes:
-
-### 1. Global Interpretation
-
-To understand which features the model finds most important.
-The following visualizations were produced:
-
-* SHAP Summary Plot
-
-* SHAP Bar Plot
-
-* Top 10 Feature Ranking
-
-Examples of important features include:
-
-* Contract Type
-
-* Monthly Charges
-
-* Tenure
-
-* Payment Method
-
-*Internet Service Type
-
-These show what drives churn across the entire customer base.
-
-### 2. Local Interpretation
-
-Three specific customers were selected:
-
-* Highest churn probability
-
-* Lowest churn probability
-
-* Middle (borderline) churn probability
-
-For each of them:
-
-* SHAP force plots were created
-
-* Dependence plots were reviewed
-
-* A written explanation was provided describing why that customer did or did not churn
-
-
-## 5. Deliverables
-
-The project includes:
-
-### 1.Complete Python code for:
-
-* Data loading
-
-* Preprocessing
-
-* Model training
-
-* SHAP global and local explanations
-
-### 2.Technical Summary
-
-* Model architecture
-
-* Evaluation metrics
-
-* Interpretation of top SHAP features
-
-### 3.Local Explanation Summary
-
-* A plain-English explanation of the three selected customers
-
-### 4.Top 10 Feature Importance List
-
-* With SHAP impact descriptions
